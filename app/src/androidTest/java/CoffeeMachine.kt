@@ -1,4 +1,6 @@
 import java.util.Scanner
+import Commands.*
+
 class CoffeeMachine {
     var water = 0
     var milk = 0
@@ -21,28 +23,28 @@ class CoffeeMachine {
     }
     private fun fAction() {
         println("Введите команду")
-        val pick = scanner.nextLine().lowercase()
-        this.status = when(pick){
-            "выключить"-> Status.STOP
-            "наполнить"-> Status.FILL
-            "статус"-> Status.INGRID
-            "кофе"-> Status.CHOICE
-            "назад"-> Status.FACTION
+        val pick = scanner.nextLine()
+        this.status = when(true){
+            pick.equals(OFF.uComm,ignoreCase = true) -> Status.STOP
+            pick.equals(FILL.uComm,ignoreCase = true)-> Status.FILL
+            pick.equals(STATUS.uComm,ignoreCase = true)-> Status.INGRID
+            pick.equals(COFFEE.uComm,ignoreCase = true)-> Status.CHOICE
+            pick.equals(BACK.uComm,ignoreCase = true)-> Status.FACTION
             else -> return
         }
     }
     private fun choice() {
         println("Введите название напитка или \"назад\" для возврата в главное меню")
-        val pickC = scanner.nextLine().lowercase()
-        this.status = when(pickC){
-            "назад" -> Status.FACTION
+        val pickC = scanner.nextLine()
+        this.status = when(true){
+            pickC.equals(BACK.uComm,ignoreCase = true) -> Status.FACTION
             else -> Status.UNKNOWN
         }
-        when (pickC) {
-            "эспрессо" -> CoffeeRecepie.ESS.makeCoffee(this)
-            "американо" -> CoffeeRecepie.AMER.makeCoffee(this)
-            "капучино" -> CoffeeRecepie.CUP.makeCoffee(this)
-            "латте" -> CoffeeRecepie.LAT.makeCoffee(this)
+        when (true) {
+            pickC.equals(CoffeeRecepie.ESS.CName,ignoreCase = true) -> CoffeeRecepie.ESS.makeCoffee(this)
+            pickC.equals(CoffeeRecepie.AMER.CName,ignoreCase = true)-> CoffeeRecepie.AMER.makeCoffee(this)
+            pickC.equals(CoffeeRecepie.CUP.CName,ignoreCase = true) -> CoffeeRecepie.CUP.makeCoffee(this)
+            pickC.equals(CoffeeRecepie.LAT.CName,ignoreCase = true) -> CoffeeRecepie.LAT.makeCoffee(this)
             else -> return
         }
         this.status = Status.FACTION
@@ -70,3 +72,5 @@ class CoffeeMachine {
         this.status = Status.OFF
     }
 }
+
+
