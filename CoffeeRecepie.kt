@@ -1,4 +1,4 @@
-enum class CoffeeRecepie(private val CName: String, private var cWater:Int, private var cMilk:Int, private var cBeans:Int){
+enum class CoffeeRecepie(internal val CName: String, private var cWater:Int, private var cMilk:Int, private var cBeans:Int){
     AMER("Американо", 120, 0, 10),
     ESS("Эспрессо", 60, 0, 10),
     CUP("Капучино", 120, 60, 20),
